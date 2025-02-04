@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jagran Lakecity University - National Science Day</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Set base font size to increase overall text size */
+    html {
+      font-size: 18px;
+    }
+    
+    /* Define CSS Variables for easier theming */
+    :root {
+      --primary-color: #fdbb2d;
+      --secondary-color: #ff9800;
+      --bg-dark: #0d0d0d;
+      --bg-darker: #111;
+      --text-light: #e0e0e0;
+      --text-muted: #bbb;
+      --section-bg: #1e1e1e;
+      --card-bg: #262626;
+    }
+    
+    /* Global Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    
+    /* Glassmorphic Navbar */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(20, 20, 30, 0.4);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+    }
+    header .logo img {
+      height: 50px;
+    }
+    /* The department name has been removed from the header logo */
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+    nav a {
+      font-size: 1.1rem; /* Increased from 1rem */
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: var(--primary-color);
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+    /* Hamburger Menu for Mobile */
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--primary-color);
+    }
+    
+    /* Hero Section with Animated Gradient Background */
+    .hero {
+      height: 100vh;
+      width: 100%;
+      background: linear-gradient(-45deg, #1a2a6c, #b21f1f, var(--primary-color), #1a2a6c);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 2rem;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: fadeIn 2s ease;
+    }
+    /* --- Professional, Systematic Animated h1 --- */
+.hero-content h1 {
+  position: relative;
+  font-size: 4rem; /* Adjust as needed */
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0; /* Start invisible */
+  /* Combined animations: entrance and continuous gradient shift */
+  animation: textEntrance 1.5s ease-out forwards, gradientMove 5s linear infinite;
+}
+
+/* Entrance Animation: slide-in, slight scale, and fade-in */
+@keyframes textEntrance {
+  0% {
+    transform: translateX(-50px) scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Gradient Animation: subtle movement for a dynamic effect */
+@keyframes gradientMove {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+    .hero-content p {
+      font-size: 1.5rem; /* Increased from 1.5rem */
+      margin-bottom: 2rem;
+    }
+    .btn-primary {
+      background: var(--primary-color);
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.2rem; /* Slightly increased */
+      color: var(--bg-dark);
+      cursor: pointer;
+      border-radius: 50px;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: var(--secondary-color);
+      transform: scale(1.05);
+    }
+    
+    /* Section Base Styles */
+    section {
+      padding: 6rem 2rem;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+    h2.section-title {
+      text-align: center;
+      font-size: 3rem; /* Increased from 2.8rem */
+      margin-bottom: 2rem;
+      color: var(--primary-color);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.3rem; /* Increased from 1.2rem */
+      margin-bottom: 4rem;
+      color: var(--text-muted);
+    }
+    /* New department info style */
+    .department-info {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+    
+    /* Introduction Section */
+    .introduction {
+      background: var(--section-bg);
+      padding: 4rem 2rem;
+      border-radius: 10px;
+      margin-bottom: 4rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+    .introduction p {
+      font-size: 1.2rem; /* Increased from 1.1rem */
+      margin-bottom: 1rem;
+      text-align: justify;
+      line-height: 1.8;
+    }
+    
+    /* Event Schedule Section */
+    .schedule-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+    }
+    .card i {
+      font-size: 3rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.8rem; /* Increased from 1.6rem */
+    }
+    .card p {
+      font-size: 1.1rem; /* Increased from 1rem */
+      color: #ccc;
+    }
+    
+    /* Competition & Lecture Section Graphics */
+    .graphic-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+    }
+    .graphic-section img {
+      max-width: 100%;
+      border-radius: 10px;
+      flex: 1 1 400px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+    }
+    .graphic-section img:hover {
+      transform: scale(1.03);
+    }
+    .graphic-section .text-content {
+      flex: 1 1 400px;
+    }
+    .graphic-section .text-content p {
+      margin-bottom: 1rem;
+      text-align: justify;
+      line-height: 1.8;
+      font-size: 1.2rem; /* Increased for better readability */
+    }
+    
+    /* Contact Section */
+    .contact {
+      background: var(--bg-darker);
+      padding: 4rem 2rem;
+      color: #fff;
+    }
+    .contact form {
+      max-width: 600px;
+      margin: auto;
+      display: grid;
+      gap: 1rem;
+    }
+    .contact input, .contact textarea {
+      padding: 1rem;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+      font-size: 1.1rem; /* Slightly increased */
+    }
+    .contact input:focus, .contact textarea:focus {
+      box-shadow: 0 0 5px var(--primary-color);
+    }
+    .contact button {
+      padding: 1rem;
+      border: none;
+      border-radius: 5px;
+      background: var(--primary-color);
+      color: var(--bg-dark);
+      font-size: 1.1rem; /* Slightly increased */
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .contact button:hover {
+      background: var(--secondary-color);
+    }
+    .contact-info {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 1.1rem;
+    }
+    .contact-info p {
+      margin-bottom: 0.5rem;
+    }
+
+    #back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ffcc00;
+      color: #003366;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      display: none;
+    }
+
+    /* Responsive adjustments for smaller screens */
+    @media (max-width: 768px) {
+      .logo span {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+        margin-top: 0.3rem;
+      }
+      header {
+        padding: 1rem;
+      }
+      nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(20,20,30,0.9);
+        flex-direction: column;
+        gap: 0;
+        display: none;
+      }
+      nav.show {
+        display: flex;
+      }
+      nav a {
+        padding: 1rem;
+        border-top: 1px solid rgba(255,255,255,0.1);
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .hero-content h1 {
+        font-size: 3.2rem; /* Increased slightly for mobile */
+      }
+      .hero-content p {
+        font-size: 1.4rem; /* Increased slightly for mobile */
+      }
+      header .logo img {
+        height: 40px;
+      }
+    }
+    
+    /* Keyframe Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar & Logo -->
+  <header>
+    <div class="logo">
+      <img src="https://jlu.edu.in/wp-content/uploads/2023/08/jlu-logo-70.png" alt="Jagran Lakecity University Logo">
+    </div>
+    <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+    <nav id="navbar">
+      <a href="#hero">Home</a>
+      <a href="#introduction">About</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#competition">Competition</a>
+      <a href="#lecture">Lecture</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero-content container">
+      <h1>National Science Day - 2025</h1>
+      <p>"Empowering <strong>Indian Youth</strong> for Global <strong>Leadership</strong> in <strong>Science and Innovation</strong> for <strong>Vikshit Bharat</strong>"</p>
+      <button class="btn-primary" onclick="window.location.href='https://forms.gle/XRUQsdYpeyk9M6m36'">
+        <i class="fas fa-edit"></i> Register Now
+      </button>
+    </div>
+  </section>
+
+  <!-- Introduction Section -->
+  <section id="introduction" class="container">
+    <h2 class="section-title">About the Event</h2>
+    <p class="section-subtitle">"Celebrating scientific breakthroughs and innovation"</p>
+    <!-- New placement of the department name -->
+    <p class="department-info">Hosted by the Faculty of Science &amp; Technology, Jagran Lakecity University</p>
+    <div class="introduction">
+      <p>
+        National Science Day is celebrated every February 28 in India to mark the discovery of the Raman Effect by Sir C.V. Raman, the first Indian to win the Nobel Prize. This day is dedicated to spreading awareness about the importance of science, its applications, and its impact on society.
+      </p>
+      <p>
+        The event, themed "Empowering Indian Youth for Global Leadership in Science and Innovation for Vikshit Bharat", aims to ignite curiosity, encourage innovation, and promote a scientific temper among the youth. It features a dynamic blend of interactive sessions and competitions, designed to inspire future generations.
+      </p>
+    </div>
+  </section>
+
+  <!-- Event Schedule Section -->
+  <section id="schedule" class="container">
+    <h2 class="section-title">Event Schedule</h2>
+    <p class="section-subtitle">"A glance at the day's exciting lineup"</p>
+    <div class="schedule-cards">
+      <div class="card">
+        <i class="fas fa-user-plus"></i>
+        <h3>Registration</h3>
+        <p>9:15 AM - 10:00 AM</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-lightbulb"></i>
+        <h3>Scientific Model Competition</h3>
+        <p>10:00 AM - 12:00 PM</p>
+        <p>Categories: Class 6-8 | Class 9-12 | Under Graduate</p>
+        <p>Team Size: 2 to 4 members</p>
+        <p>Prizes: ₹3000 | ₹2000 | ₹1000</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <h3>Science Day Lecture</h3>
+        <p>1:00 PM - 2:00 PM</p>
+        <p>Speaker: Dr. Punit Swaroop (IIRS, ISRO)</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-award"></i>
+        <h3>Prizes and Certificate Distribution</h3>
+        <p>2:00 PM - 2:30 PM</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scientific Model Competition Section -->
+  <section id="competition" class="container">
+    <h2 class="section-title">Scientific Model Competition</h2>
+    <p class="section-subtitle">"Showcasing innovation &amp; creative science"</p>
+    <div class="graphic-section">
+      <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?fit=crop&w=800&q=80" alt="Competition Image">
+      <div class="text-content">
+        <p>
+          Participants will compete in various categories tailored to different academic levels: Class 6-8, Class 9-12, and Under Graduate. Each team (2 to 4 members) is encouraged to explore themes ranging from Science for Society to Space and Astronomy, Technology &amp; Engineering, and Environmental Science.
+        </p>
+        <p>
+          The competition is designed to inspire creative thinking and innovative solutions to modern challenges, making science accessible and engaging.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Science Day Lecture Section -->
+  <section id="lecture" class="container">
+    <h2 class="section-title">Science Day Lecture</h2>
+    <p class="section-subtitle">"Inspiration from leading experts"</p>
+    <div class="graphic-section">
+      <div class="text-content">
+        <p>
+          The keynote lecture will be delivered by <b>Dr. Punit Swaroop</b>, a prominent Scientist and Engineer from IIRS, ISRO. His talk will delve into the importance of scientific inquiry and its transformative impact on society.
+        </p>
+        <p>
+          This session is designed to enlighten, motivate, and instill a passion for science among the participants.
+        </p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?fit=crop&w=800&q=80" alt="Lecture Image">
+    </div>
+  </section>
+
+  <!-- Additional Information Section -->
+  <section id="info" class="container">
+    <h2 class="section-title">More About</h2>
+    <p class="section-subtitle">"Everything you need to know"</p>
+    <div class="introduction">
+      <p>
+        Supported by the National Council for Science and Technology Communication (NCSTC), DST, Govt. of India, and the M.P. Council of Science and Technology, Bhopal, NSD 2025 promises an immersive experience with interactive sessions, exhibitions, and creative contests. The event is designed to build public trust in science and celebrate the spirit of inquiry.
+      </p>
+      <p>
+        Join us to witness groundbreaking projects, attend inspiring talks, and engage with scientific experts.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <h2 class="section-title">Contact Us</h2>
+    <p class="section-subtitle">We'd love to hear from you!</p>
+    <div class="container">
+      <form id="contactForm" action="https://formspree.io/f/xkgobevg" method="POST">
+        <input type="text" name="user_name" placeholder="Your Name" required>
+        <input type="email" name="user_email" placeholder="Your Email" required>
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+      </form>
+      
+      <div class="contact-info">
+        <p><strong>Dr. Vandana Rathore</strong> – Convener, NSD 2025</p>
+        <p>Mobile: 9926093080</p>
+        <p><strong>Overall Coordinators:</strong></p>
+        <p>Manish Srivastav: 7222937242 | Atishay Choudhary: 7440741509 | Yuvraj Singh Kushwah: 7806024141 | Samuel David: 9993393096</p>
+      </div>
+    </div>
+  </section>
+  <button id="back-to-top">&#x1F51D;</button>
+  <!-- Scroll Animation Script -->
+  <script>
+    // Animate sections when they come into view using Intersection Observer
+    const sections = document.querySelectorAll('section');
+    const observerOptions = { threshold: 0.25 };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+
+    
+
+    // Mobile Menu Toggle
+    document.getElementById('mobile-menu').addEventListener('click', function() {
+      document.getElementById('navbar').classList.toggle('show');
+    });
+    document.getElementById('back-to-top').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
